@@ -43,6 +43,7 @@ def welcome():
         f"/api/v1.0/startend"
     )
 
+#add precipitation data over a range of days
 @app.route("/api/v1.0/precipitation")
 def precipitation():
     two_years = dt.datetime.now() - dt.timedelta(days=730)
@@ -51,7 +52,7 @@ def precipitation():
 
     return jsonify(precip1)
     
-    
+#add weather station data 
 @app.route("/api/v1.0/stations")
 def stations():
     results = session.query(Station.station).all()
@@ -64,6 +65,7 @@ def stations():
     
     return jsonify(station_list)
 
+#add temperature data over a range of days
 @app.route("/api/v1.0/temperature")
 def tobs():
     two_years = dt.datetime.now() - dt.timedelta(days=730)
@@ -72,8 +74,8 @@ def tobs():
     
     return jsonify(tobs_dict)
 
+#adding data for selecting a given day of data
 @app.route("/api/v1.0/start")
-
 def calc_start(start_date):
 
     """Temp Min, Temp AVG, and Temp MAX for a given date.
@@ -91,6 +93,7 @@ def calc_start(start_date):
 
     return jsonify(start_dict)
 
+#adding temperature data for a specified range of dates
 @app.route("/api/v1.0/startend")
 def calc_temps(start_date, end_date):
     
